@@ -1,5 +1,5 @@
 import re
-from Password.ComplexityPolicy import ComplexityPolicy
+from app.Password.ComplexityPolicy import ComplexityPolicy
 
 
 class PasswordValidator:

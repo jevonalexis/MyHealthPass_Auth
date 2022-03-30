@@ -1,8 +1,8 @@
 import unittest
 import mock_data as mock
-from Password.ComplexityPolicy import ComplexityPolicy
-from Password.PasswordValidator import PasswordValidator
-from Password.Hasher import Hasher
+from app.Password.ComplexityPolicy import ComplexityPolicy
+from app.Password.PasswordValidator import PasswordValidator
+from app.Password.Hasher import Hasher
 
 
 class TestPassword(unittest.TestCase):
