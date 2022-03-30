@@ -1,0 +1,5 @@
+salt = b'489ed718053c54a2b285aca505b29287513262ece03d493c13229d735a24c1f5'
+password = 'Str0ngP@$$w0rd'
+hashed_password = '489ed718053c54a2b285aca505b29287513262ece03d493c13229d735a24c' \
+                  '1f58ce3a4fd4d0450a5edeba5f96d3fada741d52bf2693a763815338f5a17' \
+                  '4d54689bdd790f0f45efd3d1f325ca73e08f96fbebf598ffd14ff094da4cd9201bf201'
