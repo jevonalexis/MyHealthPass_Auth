@@ -1,4 +1,8 @@
-auth_config.py
+app/policy_config.py
+app/config.py
+.idea/
+*.db
+flask_session/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -16,7 +20,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+venv/Lib/
 lib64/
 parts/
 sdist/

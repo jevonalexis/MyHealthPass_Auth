@@ -1,9 +1,27 @@
+"""
+This object is used to store a password complexity policy
+"""
+
+
 class ComplexityPolicy:
+    #: Minimum password length
     min_length: int
+
+    #: Maximum password length
     max_length: int
+
+    #: True if password is required to have at least one lowercase letter [a-z], False otherwise
     lowercase_needed: bool
+
+    #: True if password is required to have at least one uppercase letter [A-Z], False otherwise
     uppercase_needed: bool
+
+    #: True if password is required to have at least one digit [0-9], False otherwise
     number_needed: bool
+
+    #: A non-separated string containing the valid special characters of which at least one must be present for a
+    # password to be valid.
+    #: Empty string '' means no special characters required
     special_characters: str
 
     def __init__(self, min_length: int, max_length: int, lowercase_needed: bool, uppercase_needed: bool,
