@@ -1,16 +1,16 @@
-#MyHealthPass_Auth
+# MyHealthPass_Auth
 
-##Description
+## Description
 
 Authentication and authorization library for MYHealthPass.
 
-##Features
+## Features
 - User Login 
 - User Registration
 - User lockout
 - Rate limiting by request signature (user agent + cookies + client ip) to prevent brute force attack
 
-###Configurable
+### Configurable
 
 - App session length
 - Password complexity policy 
@@ -28,14 +28,14 @@ Authentication and authorization library for MYHealthPass.
   - Timespan in which the attempts must be made before lockout
   - Lock out / cool down period
 
-##Requirements
+## Requirements
 
 - Python 3.7+
 - Redis client
 - A remote or local database connection
 
 
-##Set up
+## Set up
 
 - Fork this repo
 - pip install *requirements.txt*
@@ -60,6 +60,6 @@ Authentication and authorization library for MYHealthPass.
 &ast; &ast; = Redirect to password reset page in real world
 
 
-###UnitTest
+### UnitTest
 
 From project top level directory run `python -m unittest discover -s .\tests\Validator\ -p "test_*.py"`
