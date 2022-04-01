@@ -126,6 +126,9 @@ def check_token():
         token_invalidated = validation_service.invalidate_token(email, token)
         if not token_invalidated:
             err_msg = 'Incorrect token'
+        else:
+            db_service = DBService()
+            db_service.unlock_user(email)
 
     if err_msg:
         return jsonify({
