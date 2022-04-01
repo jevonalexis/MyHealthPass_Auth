@@ -1,8 +1,8 @@
 import unittest
 import mock_data as mock
-from app.Password.ComplexityPolicy import ComplexityPolicy
-from app.Password.PasswordValidator import PasswordValidator
-from app.Password.Hasher import Hasher
+from app.Validator.ComplexityPolicy import ComplexityPolicy
+from app.Validator.PasswordValidator import PasswordValidator
+from app.Validator.Hasher import Hasher
 
 
 class TestPassword(unittest.TestCase):
@@ -54,22 +54,18 @@ class TestPassword(unittest.TestCase):
         password = 'Password'
         self.assertTrue(self.password_validator.validate_has_lowercase(password))
 
-    def test_password_has_speacial_char(self):
+    def test_password_has_special_char(self):
         password = 'Passw0rd'
         self.assertFalse(self.password_validator.validate_has_special_char(password))
         password = 'P@ssw0rd'
         self.assertTrue(self.password_validator.validate_has_special_char(password))
 
-    def test_password_is_None_or_empty(self):
-        password = None
-        resp = self.password_validator.validate_password(password)
-        self.assertFalse(resp['valid'])
-
+    def test_password_is_empty(self):
         password = ''
-        resp = self.password_validator.validate_password(password)
+        resp = self.password_validator.validate(password)
         self.assertFalse(resp['valid'])
 
     def test_password_is_compliant(self):
         password = 'P@ssw0rd'
-        resp = self.password_validator.validate_password(password)
+        resp = self.password_validator.validate(password)
         self.assertTrue(resp['valid'])

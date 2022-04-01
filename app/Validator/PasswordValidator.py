@@ -1,9 +1,17 @@
 import re
-from app.Password.ComplexityPolicy import ComplexityPolicy
+from app.Validator.ComplexityPolicy import ComplexityPolicy
+from app.Validator.IValidator import IValidator, ValidationResponse
+
+"""
+Object of interface, IValidator for password validation 
+"""
 
 
-class PasswordValidator:
+class PasswordValidator(IValidator):
+    #: password complexity policy of type @ComplexityPolicy
     policy: ComplexityPolicy
+
+    #: mapping of `function` to execute to validate a given `key` - criteria and `error` to return is validation fails
     criteria_map: dict
 
     def __init__(self, policy: ComplexityPolicy):
@@ -33,6 +41,11 @@ class PasswordValidator:
         return re.search(r'[A-Z]', password) is not None
 
     def validate_has_special_char(self, password: str) -> bool:
+        """
+        :param password: password to validate for special characters
+        :return: True if the password @policy.special_characters is empty or the password contains at least 1 of the
+        characters specified, False otherwise
+        """
         if not self.policy.special_characters:
             return True
         return re.search(self.policy.special_characters, password) is not None
@@ -50,12 +63,18 @@ class PasswordValidator:
             'number_needed': {'function': self.validate_has_number,
                               'error': 'Password must be contain at least 1 number'},
             'special_characters': {'function': self.validate_has_special_char,
-                                   'error': f'Password must be contain at least 1 speacial character '
+                                   'error': f'Password must be contain at least 1 special character '
                                             f'{self.policy.special_characters}'}
         }
 
-    def validate_password(self, password: str) -> bool:
-        if not password:
+    def validate(self, password: str) -> ValidationResponse:
+        """
+
+        :param password: password to validate for all criteria in the @policy
+        :return: ValidationResponse {`valid`: True, `errors`: []} if valid
+                ValidationResponse {`valid`: False, `errors`: [errors...]} if invalid
+        """
+        if password is None or password == "":
             self.errors.append('Password is required')
             return {'valid': len(self.errors) == 0, 'errors': self.errors}
 
@@ -64,11 +83,3 @@ class PasswordValidator:
                 self.errors.append(criteria_action['error'])
         return {'valid': len(self.errors) == 0, 'errors': self.errors}
 
-
-if __name__ == '__main__':
-    from auth_config import PASSWORD_COMPLEXITY_POLICY as POLICY
-    cp = ComplexityPolicy(**POLICY)
-    print(cp)
-    pv = PasswordValidator(cp)
-    # print(pv.validate_has_special_char('Chobbers'))
-    print(pv.validate_password(None))
